@@ -22,4 +22,30 @@ if($database) {
 // Example:
 $sql = $database->prepare("SELECT * FROM aa");
 $sql->execute();
+
+// Lesson 3 ===> Insert Data To Table
+$sql1 = $database->prepare("INSERT INTO aa (id, name) VALUES (123312, 'Mohamed Nour')");
+if($sql1->execute()) {
+    echo "Yes";
+} else {
+    echo "No";
+}
+?>
+<!-- Example -->
+<form method="GET">
+    <input type="email" name="email" placeholder="Please Enter You Email" />
+    <input type="password" name="password" placeholder="Please Enter You Password" />
+    <input type="submit" value="Login" name="login">
+</form>
+<?php
+    if(isset($_GET["login"])) {
+        $email = $_GET[email];
+        $password = $_GET[password];
+        $sql2 = $database->prepare("INSERT INTO aa (email, password) VALUES ('$email', '$password' )");
+        if($sql2->execute()) {
+            echo "Yes";
+        } else {
+            echo "No";
+        }
+    }
 ?>
