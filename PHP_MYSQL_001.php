@@ -11,4 +11,15 @@ if($database) {
 } else {
     echo "Not Connected";
 }
+// Open PhpMyAdming ===> DataBase ===> Privillages ===> Edit ===> Login Information
+
+// Lesson 2 ===> Execute Rules On DataBase By SQL Language
+// 1 - connect with database such as up
+// 2 - write this :
+// $sql = $database->prepare("SQL Language Statement");
+// $sql->execute(); ===> For Execute SQL Statement
+// Date Or Time Must be In "" | '' | `` in SQL Statements
+// Example:
+$sql = $database->prepare("SELECT * FROM aa");
+$sql->execute();
 ?>
