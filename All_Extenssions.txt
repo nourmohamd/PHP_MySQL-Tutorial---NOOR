@@ -1,0 +1,35 @@
+Front End:
+----------------------------
+1 - HTML Snippets
+2 - CSS Snippets
+3 - HTML CSS Support
+4 - Live Server
+5 - Codesnap For Take of Pictures
+6 - image preview
+7 - Material Icon Theme
+8 - Material Product Icons
+9 - Noctis ===> More Theme
+10 - Prettier - Code formatter ===> Formatting Code
+11 - Auto Rename Tag
+12 - css-auto-prefix
+13 - Path Intellisense
+14 - ESLint
+15 - JavaScript (ES6) code snippets
+16 - JavaScript Booster
+17 - JavaScript Standardjs Styled Snippets
+18 - JavaScript Snippets Pack
+19 - JavaScript Atom Grammar
+20 - Bracket Pair Colorizer 2
+21 - indent-rainbow
+----------------------------
+Back End:
+----------------------------
+1 - PHP Intellisense
+2 - Format HTML In PHP
+----------------------------
+Extenssions For Google Chrome:
+1 - Google Translate
+2 - Mobile Simulator - Responsive Testing Tools
+3 - Save Page WE
+4 - JSON Viewer Pro
+----------------------------
