@@ -78,4 +78,12 @@ if($sql5->execute()) {
     $sql5 = $sql->fetchObject;
     echo $sql5["email"].$sql5["password"];
 }
+
+// Lesson 6 ===> Know Number Of Records Data | Columns Data
+$sql6 = $database->prepare("SELECT * FROM `aa`");
+if($sql6->execute()) {
+    $num = $sql6->rowCount();// Number Of Records Data
+    $numColumn = $sql6->columnCount();// Number Of Columns Data
+}
+
 ?>
