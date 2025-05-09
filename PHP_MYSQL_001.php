@@ -113,3 +113,16 @@ if(isset($_POST["Login"])) {
     <input type="submit" value="Login" />
     <input type="reset" value="Reset" />
 </form>
+
+<?php
+// Lesson 8 ===> How can you Find Errors In PHP_MySQL During Get Data
+// For Know What is Error In Your Code When Get Error After Executes
+$sql9 = $database->prepare("SELECT * FROM `aa`");
+var_dump($sql9->errorInfo());// After Solve Error You Can Remove This Line Or Comment It
+// If There Is Error Get <Message> Or <Nothing> If There Is Not Found Error
+// بعد ما تحل المشكلة يمكنك حذف سطر الفحص أو تعليقه أنت الحر بالأختيار
+if($sql9->execute()) {
+    echo "Yes";
+}
+
+?>
