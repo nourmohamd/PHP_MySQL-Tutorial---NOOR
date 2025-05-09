@@ -62,4 +62,20 @@ if($sql3->execute()) {
     }
 }
 // You Can Style The Result Then Show It In Website
+
+// Lesson 5 ===> Convert Data To Array | Object
+// Convert Data From DataBase To Array
+// 1 - connect with database such as up
+// 2 - write this :
+$sql4 = $database->prepare("SELECT * FROM `aa` WHERE id = 10");
+if($sql4->execute()) {
+    $sql4 = $sql4->fetch("PDO::FETCH_ASSOC");
+    echo $sql4["email"].$sql4["password"];
+}
+// Conver Data From DataBase To Object
+$sql5 = $database->prepare("SELECT * FROM `aa` WHERE id = 10");
+if($sql5->execute()) {
+    $sql5 = $sql->fetchObject;
+    echo $sql5["email"].$sql5["password"];
+}
 ?>
