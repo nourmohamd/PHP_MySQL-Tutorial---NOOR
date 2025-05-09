@@ -86,4 +86,30 @@ if($sql6->execute()) {
     $numColumn = $sql6->columnCount();// Number Of Columns Data
 }
 
+// Lesson 7 ===> bindParam For Top Level Security Data
+// Example:
+// 1 - connect with database such as up
+// 2 - write this :
+if(isset($_POST["Login"])) {
+    $Title = $_POST["title"];
+    $Content = $_POST["content"];
+    $Email = $_POST["email"];
+    $Password = $_POST["password"];
+    $sql7 = $database->prepare("INSERT INTO `aa` (title, content, email, password) VALUES ('$Title', '$Content', '$Email', '$Password')");// Method 1 To Insert New Record
+    $sql7->execute();
+    $sql8 = $database->prepare("INSERT INTO `aa` (title, content, email, password) VALUES (:Title, :Content, :Email, :Password)");
+    $sql8->bindParam("Title", $Title);
+    $sql8->bindParam("Content", $Content);
+    $sql8->bindParam("Email", $Email);
+    $sql8->bindParam("Password", $Password);
+    $sql8->execute();
+}
 ?>
+<form method="POST">
+    <input type="text" name="title" />
+    <input type="text" name="content" />
+    <input type="email" name="email" />
+    <input type="password" name="password" />
+    <input type="submit" value="Login" />
+    <input type="reset" value="Reset" />
+</form>
