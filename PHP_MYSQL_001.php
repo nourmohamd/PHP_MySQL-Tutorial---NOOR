@@ -49,3 +49,17 @@ if($sql1->execute()) {
         }
     }
 ?>
+<?php
+// Lesson 4 ===> Get Data From DataBase And Show It in WebSite
+// 1 - connect with database such as up
+// 2 - write this :
+$sql3 = $database->prepare("SELECT * FROM `aa`");
+if($sql3->execute()) {
+    foreach($sql3 as $a) {
+        echo "<h1>".$a["id"]."</h1>";
+        echo "<h1>".$a["email"]."</h1>";
+        echo "<h1>".$a["password"]."</h1>";
+    }
+}
+// You Can Style The Result Then Show It In Website
+?>
