@@ -69,14 +69,14 @@ if($sql3->execute()) {
 // 2 - write this :
 $sql4 = $database->prepare("SELECT * FROM `aa` WHERE id = 10");
 if($sql4->execute()) {
-    $sql4 = $sql4->fetch("PDO::FETCH_ASSOC");
+    $sql4 = $sql4->fetch(PDO::FETCH_ASSOC);
     echo $sql4["email"].$sql4["password"];
 }
 // Conver Data From DataBase To Object
 $sql5 = $database->prepare("SELECT * FROM `aa` WHERE id = 10");
 if($sql5->execute()) {
-    $sql5 = $sql->fetchObject;
-    echo $sql5["email"].$sql5["password"];
+    $sql5 = $sql->fetchObject();
+    echo $sql5->email;
 }
 
 // Lesson 6 ===> Know Number Of Records Data | Columns Data
@@ -97,7 +97,7 @@ if(isset($_POST["Login"])) {
     $Password = $_POST["password"];
     $sql7 = $database->prepare("INSERT INTO `aa` (title, content, email, password) VALUES ('$Title', '$Content', '$Email', '$Password')");// Method 1 To Insert New Record
     $sql7->execute();
-    $sql8 = $database->prepare("INSERT INTO `aa` (title, content, email, password) VALUES (:Title, :Content, :Email, :Password)");
+    $sql8 = $database->prepare("INSERT INTO `aa` (title, content, email, password) VALUES (:Title, :Content, :Email, :Password)");// Method 2 To Insert New Record
     $sql8->bindParam("Title", $Title);
     $sql8->bindParam("Content", $Content);
     $sql8->bindParam("Email", $Email);
