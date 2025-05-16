@@ -125,4 +125,46 @@ if($sql9->execute()) {
     echo "Yes";
 }
 
+// Lesson 9 ===> Upload Files To DataBase
+// Note: Always Use AUTO_INCREMENT To Every id In Any Table
+// Way1:
+// Way: We Save The File On Server And Save Path And Name And Type In DB 
+// Path = "Path/".$_FILES["file1"]["name"];
+// Example:
+/*
+Upload Files To Server
+======================
+PHP
+===
+    $username = "root";
+    $password = "";
+    $db = new PDO("mysql:host=localhost;dbname=my_db;charset=utf8", $username, $password);
+
+    if(isset($_POST["n"])) {
+        $file_name = $_FILES["file1"]["name"];
+        $file_type = $_FILES["file1"]["type"];
+        $file = $_FILES["file1"]["tmp_name"];// Move File To Server
+        move_uploaded_file($file, "path"/$file_name);
+        $sql = $db->prepare("INSERT INTO file (name, type, path) VALUES (:Name, :Type, :Path)");
+        $sql->bindParam("Name", $file_name);
+        $sql->bindParam("Type", $file_type);
+        $sql->bindParam("Path", "path//".$file_name);
+        $sql->execute();
+    }
+HTML
+====
+<form enctype="multipart/form-data" method="POST" >
+    <input type="file" name="file1" accept="image/*,video/*,audio/*"/>
+    <input type="submit" value="Send" name="s"/>
+</form>
+
+For Get Files From Server
+=========================
+$sql = $db->prepare("SELECT * FROM file");
+$sql->execute();
+foreach($sql as $a) {
+    echo "<a href='". "http://localhost/name_project/" . $a["path"] . "' download>".$a["name"]."</a>";
+}
+*/
+
 ?>
