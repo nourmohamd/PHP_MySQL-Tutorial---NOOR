@@ -211,4 +211,44 @@ Note:
 2 - In Way2 ===> Save [name, type, file] in Database
 */
 
+// Lesson 10 ===> How Remove Record In SQL-MySQL
+/*
+يوجد طريقتين لحذف سجل عبر لغة بي اتش بي
+1 - عبر حذف السجل وذلك بتحديد الشرط مباشرةً
+2 - الطريقة الثانية هي عمل حلقة وبجانب كل سجل كبسة حذف لحذف السجل
+Example1:
+=========
+$username = "root";
+$password = "";
+$db = new PDO("mysql:host=localhost;dbname=my_db;charset=utf8", $username, $password);
+$sql = $db->prepare("DELETE FROM user WHERE email = a@gmail.com");
+$sql->execute();
+
+Example2:
+=========
+$username = "root";
+$password = "";
+$db = new PDO("mysql:host=localhost;dbname=my_db;charset=utf8", $username, $password);
+
+$sql = $db->execute("SELECT * FROM user);
+$sql->execute();
+foreach($sql as $a) {
+    echo "<p>" . $a["email"] ."</p>";
+    echo "<form method='POST' enctype='multipart/form-data' >";
+    echo "<input type='hidden' name='id' value='" . $a["id"] . "' />";
+    echo "<input type='submit' name='remove' value='Rremove' />";
+    echo "</form>";
+}
+if(isset($_POST["remove"])) {
+    $sql2 = $db->prepare("DELETE FROM user WHERE id = :Id");
+    $sql2->bindParam("Id", $_POST["id"]);
+    if($sql2->execute()) {
+        echo "Removed Element Successufly";
+    } else {
+        echo "There Is An Error";
+    }
+    header("location: This.php");
+    // For Reload Page
+}
+*/
 ?>
