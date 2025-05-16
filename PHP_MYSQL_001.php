@@ -167,4 +167,48 @@ foreach($sql as $a) {
 }
 */
 
+// Way2:
+/*
+Upload Files To Server
+======================
+
+PHP
+===
+    $username = "root";
+    $password = "";
+    $db = new PDO("mysql:host=localhost;dbname=my_db;charset=utf8", $username, $password);
+
+    if(isset($_POST["s"])) {
+        $file_name = $_FILES["file1"]["name"];
+        $file_type = $_FILES["file1"]["type"];
+        $file = file_get_contents($_FILES["file1"]["tmp_name"]);
+        $sql = $db->prepare("INSERT INTO file (name, type, file) VALUES (:Name, :Type, :File)");
+        $sql->bindParam("Name", $file_name);
+        $sql->bindParam("Type", $file_type);
+        $sql->bindParam("File", $file);
+        $sql->execute();
+    }
+HTML
+====
+<form enctype="multipart/form-data" method="POST" >
+    <input type="file" name="file1" accept="image/*,video/*,audio/*"/>
+    <input type="submit" value="Send" name="s"/>
+</form>
+
+For Get Files From Server
+=========================
+$sql = $db->prepare("SELECT * FROM file");
+$sql->execute();
+foreach($sql as $a) {
+    $getFile = "data:".$a["name_file"].";base64,".base64_encode($a["file"]);
+    echo "<a href='".$getFile."' download >".$a["name_file"]."</a>";
+    ech "<br/>";
+    echo "<img src=".$getFile." /><br/>";
+}
+
+Note:
+1 - In Way1 ===> Save File In Server And [name, type, path] in Database
+2 - In Way2 ===> Save [name, type, file] in Database
+*/
+
 ?>
