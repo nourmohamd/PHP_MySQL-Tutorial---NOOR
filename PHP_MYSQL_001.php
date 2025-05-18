@@ -250,5 +250,102 @@ if(isset($_POST["remove"])) {
     header("location: This.php");
     // For Reload Page
 }
+
+Full Example For Remove Elements (I Tried This Code In My Envirmoment)
+======================================================================
+<?php
+$username = "root";
+$password = "";
+$db = new PDO("mysql:host=localhost;dbname=try;charset=utf8", $username, $password);
+
+$sql = $db->prepare("SELECT * FROM `aa`");
+if($sql->execute()) {
+    foreach($sql as $a) {
+        echo "<div>";
+        echo "<h1> The User Is ".$a["id"]."</h1>";
+        echo "<h2> Name Is ".$a["name"]."</h2>";
+        echo "<form method='POST' ><input type='hidden' name='id' value='".$a["id"]."' /><input type='submit' name='del' value='Delete'/></form>";
+        echo "</div>";
+    }
+}
+if(isset($_POST["del"])) {
+        $sql2 = $db->prepare("DELETE FROM `aa` WHERE id = :Id");
+        $sql2->bindParam("Id", $_POST["id"]);
+        if($sql2->execute()) {
+            echo "<h3>Successfuly In Delete Element</h3>";
+            header("Location: index.php");
+        } else {
+            echo "<h3>Failur In Delete</h3>";
+        }
+    }
+?>
+
+// Lesson 11 ===> For Update Data In SQL-MYSQL
+// Way1:
+الطريقة الأولى هي انك تحدد مباشرة السجل الذي تريد تعديله مع القيم الجديدة
+// Way2:
+نفس فكرة الحذف الثانية
+// Full Example
+الفكرة أنك بجانب كل عنصر تضع كبسة للحذف و عنصر اي له الرابط التالي
+http://localhost/edit.php?edit=id
+وعند الضغط عليه يحول المستخدم للصفحة الخاصة بالتعديل وتقوم بعمل شرط لوجود المتغير
+if(isset($_GET["edit"])) { Here }
+Here ===> تضع فيها كل الحقول التي تريد السماح للمستخدم بالتعديل عليها
+Form In {} Must Be POST Not GET
+
+Full Example For Edit And Update Data In SQL-MYSQL
+==================================================
+index.php
+=========
+<?php
+$username = "root";
+$password = "";
+$db = new PDO("mysql:host=localhost;dbname=try;charset=utf8", $username, $password);
+
+$sql = $db->prepare("SELECT * FROM `aa`");
+if($sql->execute()) {
+    foreach($sql as $a) {
+        echo "<div>";
+        echo "<h1> The User Is ".$a["id"]."</h1>";
+        echo "<h2> Name Is ".$a["name"]."</h2>";
+        echo "<a href='http://localhost/try/edit.php?edit=".$a["id"]."'>Edit - تعديل</a>";
+        echo "</div>";
+    }
+}
+?>
+
+edit.php
+========
+if(isset($_GET["edit"])) {
+$username = "root";
+$password = "";
+$db = new PDO("mysql:host=localhost;dbname=try;charset=utf8", $username, $password);
+$sql = $db->prepare("SELECT * FROM `aa` WHERE id = :Id");
+$sql->bindParam("Id", $_GET["edit"]);
+$sql->execute();
+if($sql->rowCount() === 1) {
+$sql = $sql->fetch(PDO::FETCH_ASSOC);
+echo "<form method='POST'>";
+    echo "<input type='id' name='id' value='".$_GET["edit"]."' readonly />";
+    echo "<br />";
+    echo "<input type='id' name='name' value='".$sql["name"]."' placeholder='Please Enter Name Of Emplyee' />";
+    echo "<input type='submit' name='update' value='Edit - تعديل' />";
+    echo "</form>";
+
+}
+
+if(isset($_POST["update"])) {
+$sql2 = $db->prepare("UPDATE `aa` SET name = :Name WHERE id = :Id");
+$sql2->bindParam("Name", $_POST["name"]);
+$sql2->bindParam("Id", $_GET["edit"]);
+if($sql2->execute()) {
+echo "Successfuly In Update Data";
+header("Location: index.php");
+} else {
+echo "Failure In Update Data";
+}
+}
+}
+
 */
 ?>
