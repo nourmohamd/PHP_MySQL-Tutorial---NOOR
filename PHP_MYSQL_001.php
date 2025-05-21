@@ -347,5 +347,40 @@ echo "Failure In Update Data";
 }
 }
 
+// Lesson 12 ===> For Create A Search Box
+// The Idea Is Make Form And Field Input And Submit And SQL Query For Execute SELECT And Show Data In Page
+// About Value Of Input
+Full Example
+============
+<form method="GET">
+    <input type="text" placeholder="Search" name="search" />
+    <input type="submit" value="Search" name="se" />
+</form>
+<?php
+    $username = "root";
+    $password = "";
+    $db = new PDO("mysql:host=localhost;dbname=try;charset=utf8", $username, $password);
+    if(isset($_GET["se"])) {
+        $searchText = trim($_GET["search"]);
+        if(empty($searchText)) {
+            echo "Not Found Any Results";
+        } else {
+            $sql = $db->prepare("SELECT * FROM `aa` WHERE title Like :Value");
+            $sql->bindParam("Value", "%".$searchText."%");
+            if($sql->execute()) {
+                if($sql->rowCount() > 0) {
+                    foreach($sql as $a) {
+                        echo "Results";
+                        // أطبع النتائج
+                    }
+                } else {
+                    echo "Not Found Anything About Your Entering Values
+                }
+            } else {
+                echo "There is an error";
+            }
+        }
+    }
+?>
 */
 ?>
