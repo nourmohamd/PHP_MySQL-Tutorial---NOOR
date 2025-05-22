@@ -65,11 +65,17 @@ if($sql3->execute()) {
 
 // Lesson 5 ===> Convert Data To Array | Object
 // Convert Data From DataBase To Array
+/*
+    There Are Two Ways To Conver Data To Array
+    ==========================================
+    1- $sql4 = $sql4->fetch(PDO::FETCH_ASSOC); ===> This For One Row
+    2- $sql4 = $sql4->fetchAll(PDO::FETCH_ASSOC); ===> This For Multi-rows
+*/
 // 1 - connect with database such as up
 // 2 - write this :
 $sql4 = $database->prepare("SELECT * FROM `aa` WHERE id = 10");
 if($sql4->execute()) {
-    $sql4 = $sql4->fetch(PDO::FETCH_ASSOC);
+    $sql4 = $sql4->fetch(PDO::FETCH_ASSOC);// Or $sql4 = $sql4->fetchAll(PDO::FETCH_ASSOC); ===> For Multi-rows
     echo $sql4["email"].$sql4["password"];
 }
 // Conver Data From DataBase To Object
