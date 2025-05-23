@@ -388,5 +388,31 @@ Full Example
         }
     }
 ?>
+
+// Lesson 13 ===> How can you filter data
+// The Idea Is Put Between For Condition in select ===> SQL-MySQL
+// Full Example:
+================
+<?php
+    $username = "root";
+    $password = "";
+    $db = new PDO("mysql:host=localhost;dbname=try;charset=utf8", $username, $password);
+
+    if(isset($_GET["filter"])) {
+        $sql = $db->prepare("SELECT * FROM products WHERE price between :Min And :Max");
+        $sql->bindParam("Min", $_GET["minAge"]);
+        $sql->bindParam("Max", $_GET["maxAge"]);
+        $sql->execute();
+        foreach($sql as $s) {
+            echo "<h1>". $s["name"] ."</h1>";
+        }
+    } else {
+        $sql = $db->prepare("SELECT * FROM products");
+        $sql->execute();
+        foreach($sql as $s) {
+            echo "<h1>". $s["name"] ."</h1>";
+        }
+    }
+?>
 */
 ?>
