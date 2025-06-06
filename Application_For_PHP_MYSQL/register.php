@@ -43,6 +43,7 @@
             <label for="male">Male</label>
         </div>
         <button class="btn btn-primary submit" type="submit" name="register">Register</button>
+        <p>If You Hava An Account Please Login In Here? <a href="login.php">here</a></p>
     </form>
     <?php
         $username = "root";
@@ -55,20 +56,31 @@
             $gender_ = $_POST["gender"];
             $username_ = $_POST["username"];
             $password_after_encoding = sha1($_POST["password1"]);
+            $activited_ = 0;
+            $security_code_ = md5(date("h:m:i"));
             if($password_1 === $password_2) {
-                $sql_search = $db->prepare("SELECT * FROM `user` WHERE email = :Email AND password = :Password");
+                $sql_search = $db->prepare("SELECT * FROM `user` WHERE email = :Email");
                 $sql_search->bindParam("Email", $email_);
-                $sql_search->bindParam("Password", $password_after_encoding);
                 $sql_search->execute();
                 if($sql_search->rowCount() === 0) {
-                    $sql_add = $db->prepare("INSERT INTO `user` (username, email, password, gender) VALUES (:Username, :Email, :Password, :Gender)");
+                    $sql_add = $db->prepare("INSERT INTO `user` (username, email, password, gender, activited, security) VALUES (:Username, :Email, :Password, :Gender, :Activited, :Security_Code)");
                     $sql_add->bindParam("Username", $username_);
                     $sql_add->bindParam("Email", $email_);
                     $sql_add->bindParam("Password", $password_after_encoding);
                     $sql_add->bindParam("Gender", $gender_);
+                    $sql_add->bindParam("Activited", $activited_);
+                    $sql_add->bindParam("Security_Code", $security_code_);
                     if($sql_add->execute()) {
-                        echo "<div class='alert alert-success' role='alert'>Successfuly To Add Your Account</div>";
-                        header("Location: login.php");
+                        echo "<div class='alert alert-success' role='alert'>The verification code has been sent to your email. Return To Your Gmail</div>";
+                        require_once "./server.php";
+                        $mail->setFrom('abdonoor684@gmail.com', 'SP Managment');
+                        $mail->addAddress($email_);
+                        $mail->Subject = "Verify Your Email";
+                        $mail->Body = "<div align='center' >" . "<h1>Thank You For Your Signning In Our Website</h1>"
+                        . "<p>URL For Verify Your Email, Please Click On URL Down:</p>"
+                        . "<a href='http://localhost/Application_for_php_mysql/active.php?code=".$security_code_."'>"."http://localhost/Application_for_php_mysql/active.php?code=".$security_code_."</a>".
+                        "</div>";
+                        $mail->send();
                     } else {
                         echo "<div class='alert alert-danger' role='alert'>Some Error Happend 😒😒😒</div>";
                     }
