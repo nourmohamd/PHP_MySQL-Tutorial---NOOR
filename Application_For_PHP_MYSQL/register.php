@@ -1,3 +1,6 @@
+<?php
+    ob_start();
+?>
 <title>Register | إنشاء حساب</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -63,7 +66,7 @@
                 $sql_search->bindParam("Email", $email_);
                 $sql_search->execute();
                 if($sql_search->rowCount() === 0) {
-                    $sql_add = $db->prepare("INSERT INTO `user` (username, email, password, gender, activited, security) VALUES (:Username, :Email, :Password, :Gender, :Activited, :Security_Code)");
+                    $sql_add = $db->prepare("INSERT INTO `user` (username, email, password, gender, activited, security, role) VALUES (:Username, :Email, :Password, :Gender, :Activited, :Security_Code, 'USER')");
                     $sql_add->bindParam("Username", $username_);
                     $sql_add->bindParam("Email", $email_);
                     $sql_add->bindParam("Password", $password_after_encoding);
@@ -91,6 +94,7 @@
                 echo "<div class='alert alert-danger' role='alert'>Wrong In Password And Confirm Password</div>";
             }
         }
+        ob_end_flush();
     ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

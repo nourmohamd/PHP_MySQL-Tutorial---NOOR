@@ -51,13 +51,19 @@ p {
                 $sql1->bindParam("Password", $password_);
                 $sql1->execute();
                 if($sql1->rowCount() === 1) {
-                    $sql1 = $sql1->fetchObject();
-                    if($sql1->activited === "1") {
+                    $user = $sql1->fetchObject();
+                    if($user->activited === "1") {
                         echo "<p class='alert alert-success'>Successfuly To Sign In my Website</p>";
                         session_start();
-                        $_SESSION["email"] = $email_;
-                        $_SESSION["password"] = $password_;
-                        header("refresh: 3;url=main.php");
+                        // Move All User Information To Session Variable : Next Level From Mind 😂
+                        $_SESSION["user"] = $user;
+                        if($user->role === "USER") {
+                            header("Location: ./user/index.php", true);
+                        } else if ($user->role === "ADMIN") {
+                            header("Location: ./admin/index.php", true);
+                        } else if ($user->role === "SUPER-ADMIN") {
+                            header("Location: ./super_admin/index.php", true);
+                        }
                     } else {
                         echo "<p class='alert alert-danger'>We will sent a code to your gmail please got it and verify your email then try again.</p>";
                     }
