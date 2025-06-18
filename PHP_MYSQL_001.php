@@ -414,5 +414,18 @@ Full Example
         }
     }
 ?>
+
+// Lesson 14 ===> Many Things You Need It
+// 1 - header("1 ===> For URL", "2 ===> For Replace true or false")
+// header("Location: New URL", true);
+// header("refresh: 3; url=new url", true);
+// 2 - die("Message For Show It And After That Close The Page") ===> Uses For Kill Any file
+// How To Use It:
+//===============
+if(isset(Any Variable)) {
+....
+} else {
+die("Message For Show It And After That Close The Page");
+}
 */
 ?>
