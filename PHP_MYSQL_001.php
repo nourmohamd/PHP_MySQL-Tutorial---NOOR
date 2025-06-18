@@ -427,5 +427,9 @@ if(isset(Any Variable)) {
 } else {
 die("Message For Show It And After That Close The Page");
 }
+// 3 - If There is some sections has the same content you can put it in external file
+// then make Inheritance for every file you need that file by:
+require "" || require_once "" ===> For Inheritance
+include "" || include_once "" ===> For Inheritance
 */
 ?>
