@@ -81,7 +81,7 @@
                         $mail->Subject = "Verify Your Email";
                         $mail->Body = "<div align='center' >" . "<h1>Thank You For Your Signning In Our Website</h1>"
                         . "<p>URL For Verify Your Email, Please Click On URL Down:</p>"
-                        . "<a href='http://localhost/Application_for_php_mysql/active.php?code=".$security_code_."'>"."http://localhost/Application_for_php_mysql/active.php?code=".$security_code_."</a>".
+                        . "<a href='http://localhost/Application1/active.php?code=".$security_code_."'>"."http://localhost/Application_for_php_mysql/active.php?code=".$security_code_."</a>".
                         "</div>";
                         $mail->send();
                     } else {
