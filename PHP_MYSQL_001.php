@@ -425,11 +425,28 @@ Full Example
 if(isset(Any Variable)) {
 ....
 } else {
+header("Location: New URL", true);
 die("Message For Show It And After That Close The Page");
 }
 // 3 - If There is some sections has the same content you can put it in external file
 // then make Inheritance for every file you need that file by:
-require "" || require_once "" ===> For Inheritance
-include "" || include_once "" ===> For Inheritance
+require "file.php" || require_once "file.php" ===> For Inheritance
+include "file.php" || include_once "file.php" ===> For Inheritance
+
+// 4 - errorInfo() ===> For Get An Issues If There Is Found
+// Example:
+if($sql->execute()) {
+} else {
+var_dump( $sql->errorInfo() );
+}
+
+// 5 - Note:
+قم بوضع قواعد الاتصال بقاعدة البيانات قي ملف منفصل وفي حال احتياجك لها قم بعمل تضمين أو وراثة
+Example:
+========
+require_once "connect_database.php" || require "connect_database.php"
+include "connect_database.php" || include_once "connect_database.php"
+هذه الخطوة متطورة جداً وذلك من أجل إذا تم تغيير موقع الداتابيس أو تغير شيء ما في قاعدة البيانات
+ستتمكن مباشرة من تغيير القواعد الخاصة بالاتصال من ملف واحد فقط لأنه مورث
 */
 ?>
