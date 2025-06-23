@@ -24,6 +24,9 @@ p {
     margin-top: 10px;
 }
 </style>
+<?php
+    require "./nav.php";
+?>
 <div class="container">
     <h1 align="center">Login | تسجيل الدخول</h1>
     <form method="POST">
