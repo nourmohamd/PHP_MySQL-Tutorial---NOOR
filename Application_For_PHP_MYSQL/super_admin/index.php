@@ -62,6 +62,7 @@
             echo $_SESSION["user"]->username;
         ?>
     </div>
+    <a class="btn btn-primary w-100" href="./profile.php">Edit profile</a>
 </div>
 <?php
         if (isset($_POST["logout"])) {

@@ -57,11 +57,12 @@
     </ul>
 </div>
 <div class="container">
-    <div class="shadow p-3 mb-5 bg-body-tertiary rounded text-center">Welcome
+    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center">Welcome
         <?php
             echo $_SESSION["user"]->username;
         ?>
     </div>
+    <a class="btn btn-primary w-100" href="./profile.php">Edit profile</a>
 </div>
 <?php
         if (isset($_POST["logout"])) {
