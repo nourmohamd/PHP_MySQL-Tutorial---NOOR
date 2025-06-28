@@ -36,8 +36,10 @@ p {
         <div>
             <label class="form-label" for="password">Password</label>
             <input class="form-control" type="password" name="password" id="password" required />
-
         </div>
+        <a href="reset_password.php"
+            class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Forget
+            Password ?</a>
         <div>
             <button class="btn btn-primary submit" type="submit" name="login">Login | تسجيل الدخول</button>
             <a class="btn btn-warning submit" href="./register.php">Register | إنشاء حساب</a>
