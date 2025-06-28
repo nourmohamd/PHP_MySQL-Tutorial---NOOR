@@ -449,4 +449,14 @@ include "connect_database.php" || include_once "connect_database.php"
 هذه الخطوة متطورة جداً وذلك من أجل إذا تم تغيير موقع الداتابيس أو تغير شيء ما في قاعدة البيانات
 ستتمكن مباشرة من تغيير القواعد الخاصة بالاتصال من ملف واحد فقط لأنه مورث
 */
+/*
+// Lesson 15 ===> How can you encrypt password in php & mysql-sql
+You Can Use function sha1("User's Password") ===> For Encrypt Any Password
+// Example 1:
+$password = "NOOR1234";
+$encrypt_password = sha1($password);
+===> Then Storage The Password After Encryption In SQL DataBase ( If You Want That )
+===> For Check About If Password Of User Correct Get Password Of User And Encrypt It Then ===>
+===> Compare With Password In SQL ( Because The Password In SQL It's Encrypted )
+*/
 ?>
