@@ -50,6 +50,9 @@
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="./create_todolist.php">Do List</a>
+        </li>
         <p>Welcome in Our Website</p>
         <form method="POST" style="margin-bottom: 0 !important;">
             <button class="logout btn btn-outline-danger" type="submit" name="logout">Logout</button>
