@@ -22,10 +22,9 @@
     margin-bottom: 0 !important;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 500px) {
     .nav {
         flex-direction: column;
-        gap: 25px;
     }
 }
 </style>
@@ -45,19 +44,26 @@
         }
         
     ?>
-<div class="container" style="border-bottom: 1px solid blue;padding-bottom: 10px;">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="profile.php">Edit Profile</a>
-        </li>
-        <p>Welcome in Edit Profile Section</p>
+<div class="container" style="width: 100%; border-bottom: 1px solid orange;padding-bottom: 10px;">
+    <ul class="nav nav-pills p-2">
+        <div class='d-flex'>
+            <a class="nav-link text-warning" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link text-warning" aria-current="page" href="./create_todolist.php">Create Do Item</a>
+            <a class="nav-link bg-dark active" aria-current="page" href="./profile.php">Profile</a>
+        </div>
         <form method="POST" style="margin-bottom: 0 !important;">
             <button class="logout btn btn-outline-danger" type="submit" name="logout">Logout</button>
         </form>
     </ul>
 </div>
 <div class="container">
-    <p class="alert alert-primary text-center w-100">Edit profile</p>
+    <div class="container">
+        <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome USER
+            <?php
+            echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
+        ?>
+        </div>
+    </div>
     <?php
         echo "<form method='POST'>";
         echo "<div>";
@@ -74,7 +80,7 @@
         echo "</div>";
         echo "<div>";
         echo    "<label class='form-label' for='gender'>Gender :</label>";
-        echo "<select name='gender' class='w-100 p-2' id='gender'>";
+        echo "<select name='gender' class='w-100 p-2 rounded' id='gender'>";
         if($_SESSION["user"]->gender == "1") {
             echo "<option selected value='1'>Male</option>";
             echo "<option value='0'>Female</option>";
@@ -85,11 +91,9 @@
         echo "</select>";
         echo "</div>";
         echo "<div>";
-        echo "<button class='mt-2 btn btn-warning submit w-100 p-2' type='submit' name='update_profile'>Update Data Profile</button>";
+        echo "<button class='mt-2 btn btn-outline-warning submit w-100 p-2' type='submit' name='update_profile'>Update Data Profile</button>";
         echo "</form>";
     ?>
-    <a href="./index.php" class="mt-2 btn btn-success submit w-100 p-2" type="submit">Return To
-        Home</a>
 </div>
 <?php
         if (isset($_POST["logout"])) {

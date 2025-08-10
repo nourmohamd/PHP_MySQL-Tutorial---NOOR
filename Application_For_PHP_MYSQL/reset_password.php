@@ -30,13 +30,13 @@ p {
 <div class="container">
     <?php
         if(!isset($_GET["code"])) {
-            echo '<h1 align="center">Login | تسجيل الدخول</h1>
+            echo '<h1 align="center">Forget Password | نسيت كلمة السر</h1>
     <form method="POST">
         <div><label class="form-label" for="email">Email</label>
             <input class="form-control" type="email" name="email" id="email" required />
         </div>
         <div>
-            <button class="btn btn-primary w-100 submit" type="submit" name="forget_password">Forget Password</button>
+            <button class="btn btn-outline-danger w-100 submit" type="submit" name="forget_password">Forget Password</button>
         </div>';
         } else if(isset($_GET["code"]) && isset($_GET["email"])) {
             echo '<h1 align="center">Reset Password</h1>
@@ -45,7 +45,7 @@ p {
             <input class="form-control" type="password" name="password" id="password" required />
         </div>
         <div>
-            <button class="btn btn-primary w-100 submit" type="submit" name="reset_password">Reset Password</button>
+            <button class="btn btn-outline-danger w-100 submit" type="submit" name="reset_password">Reset Password</button>
         </div>';
         }
     ?>

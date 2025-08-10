@@ -48,7 +48,7 @@
             <input type="radio" name="gender" value="1" id="male">
             <label for="male">Male</label>
         </div>
-        <button class="btn btn-primary submit" type="submit" name="register">Register</button>
+        <button class="btn btn-outline-warning submit" type="submit" name="register">Register</button>
         <p>If You Hava An Account Please Login In Here? <a href="login.php">here</a></p>
     </form>
     <?php

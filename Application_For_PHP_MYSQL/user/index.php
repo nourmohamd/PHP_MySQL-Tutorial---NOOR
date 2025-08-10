@@ -22,10 +22,9 @@
     margin-bottom: 0 !important;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 500px) {
     .nav {
         flex-direction: column;
-        gap: 25px;
     }
 }
 </style>
@@ -45,27 +44,24 @@
         }
         
     ?>
-<div class="container" style="border-bottom: 1px solid blue;padding-bottom: 10px;">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="./create_todolist.php">Do List</a>
-        </li>
-        <p>Welcome in Our Website</p>
+<div class="container" style="width: 100%; border-bottom: 1px solid orange;padding-bottom: 10px;">
+    <ul class="nav nav-pills p-2">
+        <div class='d-flex'>
+            <a class="nav-link bg-dark active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link text-warning" aria-current="page" href="./create_todolist.php">Create Do Item</a>
+            <a class="nav-link text-warning" aria-current="page" href="./profile.php">Profile</a>
+        </div>
         <form method="POST" style="margin-bottom: 0 !important;">
             <button class="logout btn btn-outline-danger" type="submit" name="logout">Logout</button>
         </form>
     </ul>
 </div>
 <div class="container">
-    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center">Welcome
+    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome USER
         <?php
-            echo $_SESSION["user"]->username;
+            echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
         ?>
     </div>
-    <a class="btn btn-primary w-100" href="./profile.php">Edit profile</a>
 </div>
 <?php
         if (isset($_POST["logout"])) {

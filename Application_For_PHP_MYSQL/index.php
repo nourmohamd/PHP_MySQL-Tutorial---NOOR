@@ -25,7 +25,7 @@
     require "./nav.php";
 ?>
 <div class="container">
-    <h2 align="center">Welcome in Our Website</h2>
+    <h2 align="center">Welcome in Our Website, Browsing Section</h2>
 </div>
 <?php
     ob_end_flush();
