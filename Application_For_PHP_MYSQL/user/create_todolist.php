@@ -147,7 +147,7 @@
         $id_ = $_SESSION["user"]->id;
         $sql3 = $db->prepare("SELECT * FROM `todolist` WHERE id_user = '$id_' ORDER BY `id` DESC");
         $sql3->execute();
-        $sql3 = $sql3->fetchAll(PDO::FETCH_ASSOC);
+
         echo "<table class='table table-hover' width='100%'>";
         echo "<thead>";
         echo "<tr>";
@@ -157,7 +157,13 @@
         echo "</tr>";
         echo "</thead>";
         echo "<tbody>";
-        foreach($sql3 as $s) {
+        if($sql3->rowCount() == 0) {
+                echo "<tr>";
+                echo "<td colspan='3'>Not Found Any Result</td>";
+                echo "</tr>";
+        } else {
+            $sql3 = $sql3->fetchAll(PDO::FETCH_ASSOC);
+            foreach($sql3 as $s) {
             if($s["status"] == "" || $s["status"] === "no_execute") {
                 echo "<tr>";
                 echo "<td>".$s["text"]."</td>";
@@ -171,6 +177,7 @@
                 echo "<td><form class='m-0' method='GET'><button type='submit' class='btn btn-danger' value='".$s["id"]."' name='remove_do_item'>Remove</button></form></td>";
                 echo "</tr>";
             }
+        }
         }
         echo "</tbody>";
         echo "</table>";

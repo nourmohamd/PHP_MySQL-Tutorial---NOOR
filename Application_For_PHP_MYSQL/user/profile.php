@@ -33,7 +33,7 @@
         session_start();
 
         if(isset($_SESSION["user"])) {
-            if($_SESSION["user"]->role === "USER") {
+            if($_SESSION["user"]->role === "SUPER-ADMIN") {
             } else {
                 header("Location: http://localhost/Application1/login.php", true);
                 die();
