@@ -21,8 +21,8 @@
                 echo "<td colspan='3'>Not Found Any Result</td>";
                 echo "</tr>";
         } else {
-            foreach($sql as $s) {
             $sql = $sql->fetchAll(PDO::FETCH_ASSOC);
+            foreach($sql as $s) {
             if($s["status"] == "" || $s["status"] === "no_execute") {
                 echo "<tr>";
                 echo "<td>".$s["text"]."</td>";

@@ -57,7 +57,7 @@
     </ul>
 </div>
 <div class="container">
-    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome USER
+    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome Super-Admin
         <?php
             echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
         ?>
@@ -138,7 +138,7 @@ search_input.addEventListener("input", function(event) {
             .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
             .join("&");
 
-        fetch("http://localhost/application1/user/search.php", {
+        fetch("http://localhost/application1/super_admin/search.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"

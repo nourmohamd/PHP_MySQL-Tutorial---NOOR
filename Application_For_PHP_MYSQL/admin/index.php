@@ -57,7 +57,7 @@
     </ul>
 </div>
 <div class="container">
-    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome USER
+    <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome ADMIN
         <?php
             echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
         ?>
@@ -65,47 +65,21 @@
     <div class="search">
         <input style="border-radius: 25px;border-color: transparent;border-bottom: 1px solid orange;" type="search"
             id="inputPassword5" name="search_input" class="form-control p-3 mt-5" aria-describedby="passwordHelpBlock"
-            placeholder="Type Anything To Search ...">
+            placeholder="Search About Users ...">
         <?php
             if(isset($_GET["remove_do_item"])) {
             $id_do_ = $_GET["remove_do_item"];
-            $id_user_ = $_SESSION["user"]->id;
             $username = "root";
             $password = "";
             $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
-            $sql = $db->prepare("DELETE FROM `todolist` WHERE id = :ID AND id_user = :IU");
+            $sql = $db->prepare("DELETE FROM `user` WHERE id = :ID");
             $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
             if($sql->execute()) {
-                echo "<div class='alert alert-success' role='alert'>Successfuly Remove Box ToDoList</div>";
+                echo "<div class='alert alert-success mt-2' role='alert'>Successfuly Remove User</div>";
             } else {
-                echo "<div class='alert alert-danger' role='alert'>Doesn't Remove Box ToDoLis</div>";
+                echo "<div class='alert alert-danger mt-2' role='alert'>Doesn't Remove User</div>";
             }
             header("refresh:2;url=http://localhost/Application1/admin/index.php");
-        }
-        if(isset($_GET["process_do_item_to_true"])) {
-            $id_do_ = $_GET["process_do_item_to_true"];
-            $id_user_ = $_SESSION["user"]->id;
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
-            $sql = $db->prepare("UPDATE `todolist` SET status = 'execute' WHERE id = :ID AND id_user = :IU");
-            $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
-            $sql->execute();
-            header("refresh:1;url=http://localhost/Application1/admin/index.php");
-        }
-        if(isset($_GET["process_do_item_to_false"])) {
-            $id_do_ = $_GET["process_do_item_to_false"];
-            $id_user_ = $_SESSION["user"]->id;
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
-            $sql = $db->prepare("UPDATE `todolist` SET status = 'no_execute' WHERE id = :ID AND id_user = :IU");
-            $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
-            $sql->execute();
-            header("refresh:1;url=http://localhost/Application1/admin/index.php");
         }
         ?>
         <div class="search-content p-5">
@@ -138,7 +112,7 @@ search_input.addEventListener("input", function(event) {
             .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
             .join("&");
 
-        fetch("http://localhost/application1/user/search.php", {
+        fetch("http://localhost/application1/admin/search.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
