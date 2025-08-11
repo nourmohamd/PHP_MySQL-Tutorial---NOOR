@@ -82,7 +82,7 @@
             header("refresh:2;url=http://localhost/Application1/admin/index.php");
         }
         ?>
-        <div class="search-content p-5">
+        <div class="search-content pt-5">
         </div>
     </div>
 </div>
