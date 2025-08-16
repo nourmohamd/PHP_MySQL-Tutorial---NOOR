@@ -58,7 +58,7 @@
 </div>
 <div class="container">
     <div class="container">
-        <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome USER
+        <div class="shadow p-3 mb-2 bg-body-tertiary rounded text-center fw-bold">Welcome Admin
             <?php
             echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
         ?>
@@ -102,9 +102,7 @@
             header("Location: http://localhost/Application1/login.php", true);
         }
         if(isset($_POST["update_profile"])) {
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8", $username, $password);
+            require "./../connect_to_database.php";
             $username_ = $_POST["username"];
             $password_ = sha1($_POST["password1"]);
             $gender_ = $_POST["gender"];

@@ -10,10 +10,9 @@
 }
 </style>
 <div class="container">
-    <?php if($_GET["code"]) {
-    $username="root";
-    $password="";
-    $db=new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+    <?php 
+    if($_GET["code"]) {
+        require "./connect_to_database.php";
     // Check About Code
     $sql=$db->prepare("SELECT * FROM `user` WHERE security = :Security");
     $sql->bindParam("Security", $_GET["code"]);

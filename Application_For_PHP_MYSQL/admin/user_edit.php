@@ -69,9 +69,7 @@
         ?>
     </div>
     <?php
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+            require "./../connect_to_database.php";
             $id_user_ = $_GET["id_user"];
             $sql = $db->prepare("SELECT * FROM `user` WHERE id = :ID");
             $sql->bindParam("ID", $id_user_);
@@ -129,8 +127,7 @@
         }
         echo '
         <button class="btn btn-dark mt-3" type="submit" name="update">Update</button>
-    </form>
-            ';
+    </form>';
     ?>
 
 </div>

@@ -102,9 +102,7 @@
             header("Location: http://localhost/Application1/login.php", true);
         }
         if(isset($_POST["update_profile"])) {
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8", $username, $password);
+            require "./../connect_to_database.php";
             $username_ = $_POST["username"];
             $password_ = sha1($_POST["password1"]);
             $gender_ = $_POST["gender"];

@@ -1,11 +1,8 @@
 <?php
-    $username = "root";
-    $password = "";
-    $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+    require "./../connect_to_database.php";
     $search_ = $_POST["search_value"];
-    $id_user_ = $_POST["id_user"];
 
-    $sql = $db->prepare("SELECT * FROM `user` WHERE role = 'USER'");
+    $sql = $db->prepare("SELECT * FROM `user` WHERE `email` LIKE '%$search_%' AND role = 'USER'");
     $sql->execute();
         echo "<table class='table table-hover' width='100%'>";
         echo "<thead>";

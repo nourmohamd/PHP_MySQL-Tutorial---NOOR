@@ -70,9 +70,7 @@
             if(isset($_GET["remove_do_item"])) {
             $id_do_ = $_GET["remove_do_item"];
             $id_user_ = $_SESSION["user"]->id;
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+            require "./../connect_to_database.php";
             $sql = $db->prepare("DELETE FROM `todolist` WHERE id = :ID AND id_user = :IU");
             $sql->bindParam("ID", $id_do_);
             $sql->bindParam("IU", $id_user_);
@@ -86,9 +84,7 @@
         if(isset($_GET["process_do_item_to_true"])) {
             $id_do_ = $_GET["process_do_item_to_true"];
             $id_user_ = $_SESSION["user"]->id;
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+            require "./../connect_to_database.php";
             $sql = $db->prepare("UPDATE `todolist` SET status = 'execute' WHERE id = :ID AND id_user = :IU");
             $sql->bindParam("ID", $id_do_);
             $sql->bindParam("IU", $id_user_);
@@ -98,9 +94,7 @@
         if(isset($_GET["process_do_item_to_false"])) {
             $id_do_ = $_GET["process_do_item_to_false"];
             $id_user_ = $_SESSION["user"]->id;
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+            require "./../connect_to_database.php";
             $sql = $db->prepare("UPDATE `todolist` SET status = 'no_execute' WHERE id = :ID AND id_user = :IU");
             $sql->bindParam("ID", $id_do_);
             $sql->bindParam("IU", $id_user_);

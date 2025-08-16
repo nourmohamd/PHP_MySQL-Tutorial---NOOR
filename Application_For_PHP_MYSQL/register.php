@@ -52,9 +52,7 @@
         <p>If You Hava An Account Please Login In Here? <a href="login.php">here</a></p>
     </form>
     <?php
-        $username = "root";
-        $password = "";
-        $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8", $username, $password);
+        require "./connect_to_database.php";
         if(isset($_POST["register"])) {
             $email_ = $_POST["email"];
             $password_1 = $_POST["password1"];

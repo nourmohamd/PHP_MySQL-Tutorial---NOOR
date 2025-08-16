@@ -46,9 +46,7 @@ p {
         </div>
         <?php
             if(isset($_POST["login"])) {
-                $username = "root";
-                $password = "";
-                $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+                require "./connect_to_database.php";
                 $email_ = filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL);
                 $password_ = trim(sha1($_POST["password"]));
                 $sql1 = $db->prepare("SELECT * FROM `user` WHERE email = :Email AND password = :Password");

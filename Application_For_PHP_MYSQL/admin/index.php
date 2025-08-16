@@ -69,9 +69,7 @@
         <?php
             if(isset($_GET["remove_do_item"])) {
             $id_do_ = $_GET["remove_do_item"];
-            $username = "root";
-            $password = "";
-            $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+            require "./../connect_to_database.php";
             $sql = $db->prepare("DELETE FROM `user` WHERE id = :ID");
             $sql->bindParam("ID", $id_do_);
             if($sql->execute()) {
@@ -105,7 +103,6 @@ search_input.addEventListener("input", function(event) {
     if (value_ !== "") {
         const data = {
             search_value: value_,
-            id_user: <?php echo json_encode($_SESSION["user"]->id); ?>,
         };
 
         const body = Object.entries(data)

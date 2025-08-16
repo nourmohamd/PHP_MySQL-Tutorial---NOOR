@@ -52,9 +52,7 @@ p {
 
     <?php
             if(isset($_POST["forget_password"])) {
-                $username = "root";
-                $password = "";
-                $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+                require "./connect_to_database.php";
                 $email_ = $_POST["email"];
                 $check_email = $db->prepare("SELECT * FROM `user` WHERE email = :Email");
                 $check_email->bindParam("Email", $email_);
@@ -76,9 +74,7 @@ p {
                 }
             }
             if(isset($_POST["reset_password"])) {
-                $username = "root";
-                $password = "";
-                $db = new PDO("mysql:host=localhost;dbname=app1;charset=utf8;", $username, $password);
+                require "./connect_to_database.php";
                 $password_ = sha1($_POST["password"]);
                 $email_ = $_GET["email"];
                 $sql = $db->prepare("UPDATE `user` SET password = :Password WHERE email = :Email");
