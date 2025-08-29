@@ -48,6 +48,7 @@
     <ul class="nav nav-pills p-2">
         <div class='d-flex'>
             <a class="nav-link text-warning" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link text-warning" aria-current="page" href="./product.php">Our Product</a>
             <a class="nav-link text-warning" aria-current="page" href="./create_todolist.php">Create Do Item</a>
             <a class="nav-link bg-dark active" aria-current="page" href="./profile.php">Profile</a>
         </div>

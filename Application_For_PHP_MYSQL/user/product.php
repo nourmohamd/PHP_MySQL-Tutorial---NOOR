@@ -1,6 +1,42 @@
+<?php
+// Some Advice Or Tip To Make Results Show In More One Page
+// ========================================================
+/*
+1- Connect To DataBase - إتصال بقاعدة البيانات لجلب المنتجات منها
+
+2- Define Variable For Save Number Of Products In Every Page You Want To Show - تعريف متغير لحفظ عدد المنتجات التي تريد عرضها في كل صفحة
+
+3- Get Number Of Product (Total) - جلب عدد البيانات الكلي
+
+4- Select Number Of Page Customer Work By It Now - تحديد رقم الصفحة التي يعمل عليها الزائر الآن
+
+5- Select Number Of Page (Total) - تحديد عدد الصفحات الإجمالي
+
+*/
+// 1
+require "./../connect_to_database.php";
+
+// 2
+$results_number = 50;
+
+// 3
+$data = $db->prepare("SELECT * FROM `product`");
+$data->execute();
+$number_product = $data->rowCount(); // Number Of Products
+
+// 4
+if(!isset($_GET["page"])) {
+    $page = 1;
+} else {
+    $page = $_GET["page"];
+}
+
+// 5
+$number_page = ceil($number_product / $results_number);
+?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<title>Main User</title>
+<title>Products Page <?php echo $page; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
 .container {
@@ -47,8 +83,8 @@
 <div class="container" style="width: 100%; border-bottom: 1px solid orange;padding-bottom: 10px;">
     <ul class="nav nav-pills p-2">
         <div class='d-flex'>
-            <a class="nav-link bg-dark active" aria-current="page" href="index.php">Home</a>
-            <a class="nav-link text-warning" aria-current="page" href="./product.php">Our Product</a>
+            <a class="nav-link text-warning" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link bg-dark active" aria-current="page" href="./create_todolist.php">Our Product</a>
             <a class="nav-link text-warning" aria-current="page" href="./create_todolist.php">Create Do Item</a>
             <a class="nav-link text-warning" aria-current="page" href="./profile.php">Profile</a>
         </div>
@@ -63,47 +99,35 @@
             echo "<span class='text-success'>".$_SESSION["user"]->username."</span>";
         ?>
     </div>
-    <div class="search">
-        <input style="border-radius: 25px;border-color: transparent;border-bottom: 1px solid orange;" type="search"
-            id="inputPassword5" name="search_input" class="form-control p-3 mt-5" aria-describedby="passwordHelpBlock"
-            placeholder="Type Anything To Search ...">
+    <h1 class="mt-5 mb-5 text-center">Page <?php echo $page; ?></h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
-            if(isset($_GET["remove_do_item"])) {
-            $id_do_ = $_GET["remove_do_item"];
-            $id_user_ = $_SESSION["user"]->id;
-            require "./../connect_to_database.php";
-            $sql = $db->prepare("DELETE FROM `todolist` WHERE id = :ID AND id_user = :IU");
-            $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
-            if($sql->execute()) {
-                echo "<div class='alert alert-success' role='alert'>Successfuly Remove Box ToDoList</div>";
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Doesn't Remove Box ToDoLis</div>";
+            $sql = $db->prepare("SELECT * FROM `product` LIMIT ".$results_number." OFFSET ". ($page-1)*$results_number);
+            $sql->execute();
+            foreach($sql as $s) {
+                echo '<div class="col">
+                        <div class="card">
+                        <img height="250px" src="'.$s["img_link"].'" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">'.$s["name_product"].'</h5>
+                            <p class="card-text">'.$s["category"].'</p>
+                        </div>
+                    </div>
+        </div>';
             }
-            header("refresh:2;url=http://localhost/Application1/user/index.php");
-        }
-        if(isset($_GET["process_do_item_to_true"])) {
-            $id_do_ = $_GET["process_do_item_to_true"];
-            $id_user_ = $_SESSION["user"]->id;
-            require "./../connect_to_database.php";
-            $sql = $db->prepare("UPDATE `todolist` SET status = 'execute' WHERE id = :ID AND id_user = :IU");
-            $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
-            $sql->execute();
-            header("refresh:1;url=http://localhost/Application1/user/index.php");
-        }
-        if(isset($_GET["process_do_item_to_false"])) {
-            $id_do_ = $_GET["process_do_item_to_false"];
-            $id_user_ = $_SESSION["user"]->id;
-            require "./../connect_to_database.php";
-            $sql = $db->prepare("UPDATE `todolist` SET status = 'no_execute' WHERE id = :ID AND id_user = :IU");
-            $sql->bindParam("ID", $id_do_);
-            $sql->bindParam("IU", $id_user_);
-            $sql->execute();
-            header("refresh:1;url=http://localhost/Application1/user/index.php");
-        }
         ?>
-        <div class="search-content p-5">
+    </div>
+    <div class="btn-toolbar mt-5" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            <?php
+                for($i=1;$i<=$number_page;$i++) {
+                    if($page == $i) {
+                        echo '<a type="button" href="http://localhost/Application1/user/product.php?page='.$i.'" class="btn btn-dark bg-dark">'.$i.'</a>';
+                    } else {
+                        echo '<a type="button" href="http://localhost/Application1/user/product.php?page='.$i.'" class="btn btn-warning">'.$i.'</a>';
+                    }
+                }
+            ?>
         </div>
     </div>
 </div>
