@@ -83,7 +83,7 @@
             header("Location: http://localhost/Application1/login.php", true);
         }
         if (isset($_GET["add_new_box_in_list"])) {
-            require "/../connect_to_database.php";
+            require "./../connect_to_database.php";
             $text_ = $_GET["text_list"];
             $email_ = $_SESSION["user"]->email;
             $sql2 = $db->prepare("SELECT * FROM `user` WHERE email = :Email");
